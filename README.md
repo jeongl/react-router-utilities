@@ -3,12 +3,13 @@
 Render the children to include the routes.
 
 ```jsx
+const this.props.isAuthed = false;
 <ProtectedRouteGroup
   redirectChoices={[
     { path: "/welcome", test: false },
-    { path: "/wecomess", test: false }
+    // Redirect to the first passed test.
+    { path: "/sign-in", test: this.props.isAuthed }
   ]}
-  Component={() => <div>test</div>}
 >
   <Route path="/welcome" component={Welcome} />
   <Route
@@ -16,10 +17,6 @@ Render the children to include the routes.
     path={"/setup-market"}
     render={() => <Redirect to={"/setup-market/add-payment"} />}
   />
-  <Route exact path="/setup-market/:stage" component={SetupMarketRoutes} />
-  <Route exact path="/profile" component={Profile} />
-  <Route exact path="/profile/vehicles" component={ProfileVehicles} />
-  <Route exact path="/profile/vehicles/add" component={ProfileAddVehicle} />
 </ProtectedRouteGroup>
 ```
 
@@ -27,10 +24,10 @@ or
 
 ```js
   <ProtectedRoutes
+      Component={() => <div>test</div>}
     redirectChoices={[
       {path: '/welcome', test: false},
       {path: '/wecomess', test: false}
     ]}
-    Component{() => <div></div>}
   >
 ```
