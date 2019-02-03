@@ -17,8 +17,8 @@
   "keywords": [
     "react-router"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Jeong Lim",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jeongl/react-router-utilities/issues"
   },
