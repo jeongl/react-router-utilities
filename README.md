@@ -1,14 +1,27 @@
 # react-router-utilities
 
-Render the children to include the routes.
+Basic example for `<ProtectRoute />`
+
+If the test passes it will redirect with the specified path.
+Otherwise it will either use the render prop to render the component or its children.
 
 ```jsx
+const authed = false;
+
+const HomePage = (props) => <div id="homepage">Home page.</div>
+
 <ProtectedRoute
-  path="/market/dashboard"
-  test={this.props.isAuthed}
-  redirectPath="/welomne"
-  render={props => <div>test</div>}
-/>
+  path="/home"
+  redirect={{ test: authed === false, path: "/signup" }}
+  render={props => <Homepage {...props} /> }
+>
+// alertnatively
+<ProtectedRoute
+  path="/home"
+  redirect={{ test: authed === false, path: "/signup" }}
+>
+  <Homepage {...props} />
+</ProtectedRoute>
 ```
 
 ```jsx
@@ -24,12 +37,14 @@ const this.props.isAuthed = false;
     { path: "/sign-in", test: this.props.isAuthed }
   ]}
 >
-  <Route path="/welcome" component={Welcome} />
-  <Route
-    exact
-    path={"/setup-market"}
-    render={() => <Redirect to={"/setup-market/add-payment"} />}
-  />
+  <Switch>
+    <Route path="/welcome" component={Welcome} />
+    <Route
+      exact
+      path={"/setup-market"}
+      render={() => <Redirect to={"/setup-market/add-payment"} />}
+    />
+  </Switch>
 </ProtectedRouteGroup>
 ```
 
