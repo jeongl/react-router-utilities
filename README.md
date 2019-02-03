@@ -3,7 +3,15 @@
 Render the children to include the routes.
 
 ```jsx
+  <ProtectedRoute test={this.props.isAuthed} redirectPath="/welomne" render={(props) => <div>test</div> }
+```
+
+```jsx
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+
 const this.props.isAuthed = false;
+
 <ProtectedRouteGroup
   redirectChoices={[
     { path: "/welcome", test: false },

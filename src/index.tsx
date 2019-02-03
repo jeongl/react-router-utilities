@@ -1,19 +1,9 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect
-} from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
+import { RouteInterface, TypeOrUndefined } from "./types";
+import { bool } from "prop-types";
 
-interface RouteInterface {
-  path: string;
-  test: boolean;
-}
-
-type TypeOrUndefined<T> = T | undefined;
-
-const ProtectedRoutes: React.FunctionComponent<{
+const ProtectedRoutes: React.FC<{
   Component?: any;
   children?: React.ReactNode;
   defaultPath: string;
@@ -39,6 +29,15 @@ const ProtectedRoutes: React.FunctionComponent<{
   );
 };
 
-const test = () => "test";
+const ProtectedRoute: React.FC<{
+  test: boolean;
+  render: any;
+  redirectPath: string;
+}> = ({ test, render: Component, redirectPath, ...rest }) =>
+  test ? (
+    <Route {...rest} render={props => <Component {...props} />} />
+  ) : (
+    <Redirect to={redirectPath} />
+  );
 
-export { ProtectedRoutes, ProtectedRoutes as ProtectedRouteGroup, test };
+export { ProtectedRoutes, ProtectedRoute };
