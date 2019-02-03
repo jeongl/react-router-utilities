@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { RouteInterface, TypeOrUndefined } from "./types";
+import { RouteInterface, TypeOrUndefined, Props } from "./types";
 
 // type Component = React.
 
@@ -29,14 +29,6 @@ const ProtectedRouteGroup: React.FC<{
     />
   );
 };
-
-interface Props {
-  render: any;
-  redirect: {
-    test?: boolean;
-    path?: string;
-  };
-}
 
 const ProtectedRoute: React.FC<Props> = ({
   redirect,

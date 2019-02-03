@@ -5,4 +5,12 @@ interface RouteInterface {
 
 type TypeOrUndefined<T> = T | undefined;
 
-export { RouteInterface, TypeOrUndefined };
+interface Props {
+  render: any;
+  redirect: {
+    test?: boolean;
+    path?: string;
+  };
+}
+
+export { RouteInterface, TypeOrUndefined, Props };
