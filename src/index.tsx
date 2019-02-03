@@ -1,9 +1,10 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { RouteInterface, TypeOrUndefined } from "./types";
-import { bool } from "prop-types";
 
-const ProtectedRoutes: React.FC<{
+// type Component = React.
+
+const ProtectedRouteGroup: React.FC<{
   Component?: any;
   children?: React.ReactNode;
   defaultPath: string;
@@ -11,7 +12,7 @@ const ProtectedRoutes: React.FC<{
   location: {
     pathname: string;
   };
-}> = ({ Component, children, location, redirectChoices, ...rest }) => {
+}> = ({ redirectChoices, Component, children, location, ...rest }) => {
   const returnObj: TypeOrUndefined<RouteInterface> = redirectChoices.find(
     (option: RouteInterface) => option.test
   );
@@ -29,15 +30,37 @@ const ProtectedRoutes: React.FC<{
   );
 };
 
-const ProtectedRoute: React.FC<{
-  test: boolean;
+interface Props {
   render: any;
-  redirectPath: string;
-}> = ({ test, render: Component, redirectPath, ...rest }) =>
-  test ? (
-    <Route {...rest} render={props => <Component {...props} />} />
-  ) : (
-    <Redirect to={redirectPath} />
-  );
+  redirect: {
+    test?: boolean;
+    path?: string;
+  };
+}
 
-export { ProtectedRoutes, ProtectedRoute };
+const ProtectedRoute: React.FC<Props> = ({
+  redirect,
+  render: Component,
+  ...rest
+}) => (
+  <Route
+    {...rest}
+    render={props => {
+      return redirect && redirect.test ? (
+        <Component {...props} {...rest} />
+      ) : (
+        (redirect && redirect.path && <Redirect to={redirect.path} />) || (
+          <div>test</div>
+        )
+      );
+    }}
+  />
+);
+
+function Div<T>(props: { value: string } & T) {
+  const { value, ...rest } = props as any; // spreading on generics not yet supported
+
+  return <div {...rest} />;
+}
+
+export { ProtectedRouteGroup, ProtectedRoute };

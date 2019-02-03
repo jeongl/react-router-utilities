@@ -3,7 +3,12 @@
 Render the children to include the routes.
 
 ```jsx
-  <ProtectedRoute test={this.props.isAuthed} redirectPath="/welomne" render={(props) => <div>test</div> }
+<ProtectedRoute
+  path="/market/dashboard"
+  test={this.props.isAuthed}
+  redirectPath="/welomne"
+  render={props => <div>test</div>}
+/>
 ```
 
 ```jsx

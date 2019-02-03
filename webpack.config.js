@@ -30,7 +30,6 @@ module.exports = {
   ],
   output: {
     libraryTarget: "umd",
-    umdNamedDefine: true,
     filename: "index.js",
     path: path.resolve(__dirname, "dist")
   },

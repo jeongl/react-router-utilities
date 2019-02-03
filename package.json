@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "setup": "rm -rf node_modules && npm i && npm run build",
     "build": "webpack",
     "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +14,9 @@
     "type": "git",
     "url": "git+https://github.com/jeongl/react-router-utilities.git"
   },
-  "keywords": [],
+  "keywords": [
+    "react-router"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
