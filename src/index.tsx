@@ -31,15 +31,9 @@ const ProtectedRoutes: React.FunctionComponent<{
     <Route
       {...rest}
       render={props =>
-        !path ? (
-          <Router>
-            <Switch>
-              {Component && <Component path={path} {...rest} />} || {children}
-            </Switch>
-          </Router>
-        ) : (
-          path !== location.pathname && <Redirect to={{ pathname: path }} />
-        )
+        !path
+          ? (Component && <Component path={path} {...rest} />) || children
+          : path !== location.pathname && <Redirect to={{ pathname: path }} />
       }
     />
   );
@@ -47,4 +41,4 @@ const ProtectedRoutes: React.FunctionComponent<{
 
 const test = () => "test";
 
-export { ProtectedRoutes, test };
+export { ProtectedRoutes, ProtectedRoutes as ProtectedRouteGroup, test };
