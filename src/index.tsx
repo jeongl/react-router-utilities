@@ -1,22 +1,27 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { RouteInterface, TypeOrUndefined, Props } from "./types";
+import { IRedirectChoices, UndefinedOr } from "./types";
 
-// type Component = React.
-
-const ProtectedRouteGroup: React.FC<{
-  Component?: any;
+interface IProtectedRouteGroup<RenderFnProps> {
+  Component?: React.ComponentType<
+    RenderFnProps | Partial<{ path: UndefinedOr<string> }>
+  >;
   children?: React.ReactNode;
   defaultPath: string;
-  redirectChoices: Array<RouteInterface>;
+  redirectChoices: Array<IRedirectChoices>;
   location: {
     pathname: string;
   };
-}> = ({ redirectChoices, Component, children, location, ...rest }) => {
-  const returnObj: TypeOrUndefined<RouteInterface> = redirectChoices.find(
-    (option: RouteInterface) => option.test
+}
+
+function ProtectedRouteGroup<RenderProps extends object>(
+  props: IProtectedRouteGroup<RenderProps>
+): JSX.Element {
+  const { redirectChoices, Component, children, location, ...rest } = props;
+  const returnObj: UndefinedOr<IRedirectChoices> = redirectChoices.find(
+    (option: IRedirectChoices) => option.test
   );
-  const path: TypeOrUndefined<string> = returnObj && returnObj.path;
+  const path: UndefinedOr<string> = returnObj && returnObj.path;
 
   return (
     <Route
@@ -28,13 +33,15 @@ const ProtectedRouteGroup: React.FC<{
       }
     />
   );
-};
+}
 
-const ProtectedRoute: React.FC<Props> = ({
-  redirect,
-  render: Component,
-  ...rest
-}) => (
+const ProtectedRoute: React.FC<{
+  render: React.FunctionComponent;
+  redirect: {
+    test?: boolean;
+    path?: string;
+  };
+}> = ({ redirect, render: Component, ...rest }): JSX.Element => (
   <Route
     {...rest}
     render={props => {
@@ -48,11 +55,5 @@ const ProtectedRoute: React.FC<Props> = ({
     }}
   />
 );
-
-function Div<T>(props: { value: string } & T) {
-  const { value, ...rest } = props as any; // spreading on generics not yet supported
-
-  return <div {...rest} />;
-}
 
 export { ProtectedRouteGroup, ProtectedRoute };

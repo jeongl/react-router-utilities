@@ -1,16 +1,8 @@
-interface RouteInterface {
+interface IRedirectChoices {
   path: string;
   test: boolean;
 }
 
-type TypeOrUndefined<T> = T | undefined;
+type UndefinedOr<T> = T | undefined;
 
-interface Props {
-  render: any;
-  redirect: {
-    test?: boolean;
-    path?: string;
-  };
-}
-
-export { RouteInterface, TypeOrUndefined, Props };
+export { IRedirectChoices, UndefinedOr };
