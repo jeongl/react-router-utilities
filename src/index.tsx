@@ -22,9 +22,9 @@ const ProtectedRoutes: React.FunctionComponent<{
     pathname: string;
   };
 }> = ({ Component, children, location, redirectChoices, ...rest }) => {
-  const returnObj: TypeOrUndefined<RouteInterface> = (redirectChoices as Array<
-    RouteInterface
-  >).find((option: RouteInterface) => option.test);
+  const returnObj: TypeOrUndefined<RouteInterface> = redirectChoices.find(
+    (option: RouteInterface) => option.test
+  );
   const path: TypeOrUndefined<string> = returnObj && returnObj.path;
 
   return (
