@@ -21,15 +21,15 @@ const ProtectedRoutes: React.FunctionComponent<{
   location: {
     pathname: string;
   };
-}> = ({ Component, children, redirectChoices, ...rest }) => {
-  const returnObj: TypeOrUndefined<
+}> = ({ Component, children, location, redirectChoices, ...rest }) => {
+  const returnObj: TypeOrUndefined<RouteInterface> = (redirectChoices as Array<
     RouteInterface
-  > = (redirectChoices as any).find((option: RouteInterface) => option.test);
+  >).find((option: RouteInterface) => option.test);
   const path: TypeOrUndefined<string> = returnObj && returnObj.path;
 
   return (
     <Route
-      {...rest as any}
+      {...rest}
       render={props =>
         !path ? (
           <Router>
@@ -38,13 +38,13 @@ const ProtectedRoutes: React.FunctionComponent<{
             </Switch>
           </Router>
         ) : (
-          path !== location.pathname && (
-            <Redirect to={{ pathname: (returnObj as RouteInterface).path }} />
-          )
+          path !== location.pathname && <Redirect to={{ pathname: path }} />
         )
       }
     />
   );
 };
 
-export { ProtectedRoutes };
+const test = () => "test";
+
+export { ProtectedRoutes, test };

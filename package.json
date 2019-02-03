@@ -20,14 +20,20 @@
     "url": "https://github.com/jeongl/react-router-utilities/issues"
   },
   "homepage": "https://github.com/jeongl/react-router-utilities#readme",
-  "dependencies": {
+  "peerDependencies": {
+    "react": "^16.7.0",
+    "react-router-dom": "^4.3.1"
+  },
+  "devDependencies": {
     "@types/react": "^16.8.1",
     "@types/react-router-dom": "^4.3.1",
     "clean-webpack-plugin": "^1.0.1",
     "react": "^16.7.0",
     "react-router-dom": "^4.3.1",
+    "terser-webpack-plugin": "^1.2.1",
     "ts-loader": "^5.3.3",
     "typescript": "^3.3.1",
+    "uglifyjs-webpack-plugin": "^2.1.1",
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"
