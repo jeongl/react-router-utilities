@@ -2,7 +2,7 @@
 
 Basic example for `<ProtectRoute />`
 
-If the test passes it will redirect with the specified path.
+If the test passes it will redirect to the specified path.
 Otherwise it will either use the render prop to render the component or its children.
 
 ```jsx
@@ -14,11 +14,13 @@ const HomePage = (props) => <div id="homepage">Home page.</div>
   path="/home"
   redirect={{ test: authed === false, path: "/signup" }}
   render={props => <Homepage {...props} /> }
->
-// alertnatively
+/>
+
+// or
+
 <ProtectedRoute
   path="/home"
-  redirect={{ test: authed === false, path: "/signup" }}
+  redirect={{ test: authed === true, path: "/signup" }}
 >
   <Homepage {...props} />
 </ProtectedRoute>
