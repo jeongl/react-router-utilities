@@ -1,0 +1,45 @@
+{
+  "name": "react-router-utilities",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "clean": "./scripts.sh",
+    "build": "webpack",
+    "start": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeongl/react-router-utilities.git"
+  },
+  "keywords": [
+    "react-router"
+  ],
+  "author": "Jeong Lim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jeongl/react-router-utilities/issues"
+  },
+  "homepage": "https://github.com/jeongl/react-router-utilities#readme",
+  "peerDependencies": {
+    "react": "^16.7.0",
+    "react-router-dom": "^4.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.21",
+    "@types/react": "^16.8.1",
+    "@types/react-router-dom": "^4.3.1",
+    "clean-webpack-plugin": "^1.0.1",
+    "react": "^16.7.0",
+    "react-router-dom": "^4.3.1",
+    "terser-webpack-plugin": "^1.2.1",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.3.1",
+    "uglifyjs-webpack-plugin": "^2.1.1",
+    "webpack": "^4.2",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  }
+}
