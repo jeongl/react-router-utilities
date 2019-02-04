@@ -1,5 +1,4 @@
 const path = require("path");
-const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = {
@@ -22,12 +21,7 @@ module.exports = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"]
   },
-  plugins: [
-    // new UglifyJSPlugin({
-    //   sourceMap: true
-    // }),
-    new CleanWebpackPlugin(["dist"])
-  ],
+  plugins: [new CleanWebpackPlugin(["dist"])],
   output: {
     libraryTarget: "umd",
     filename: "index.js",
