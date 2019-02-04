@@ -1,6 +1,6 @@
 # react-router-utilities
 
-So far the the utilities provided help with protecting groups of routes, and allowing for multiple redirect scenarios.
+The available utilities created so far protects groups of routes. Also allows for multiple redirect scenarios.
 
 ## Installation
 
@@ -70,7 +70,7 @@ All tests fail, render children option.
 If the provided test is true it will redirect to the specified path.
 Otherwise it will either use the render prop to render the component or its children.
 
-- **`<ProtectedRoute />` is a wrapper around `<Route />`. It passes the `path` parameter (also spreads props that you include) and will only run if the path matches with how react-router is used.**
+- **`<ProtectedRoute />` is a wrapper around `<Route />`. It passes the `path` parameter (also spreads props that you include) and will only run if the path matches like how react-router is used.**
 - **`<ProtectedRouteGroup />` allows a short circuit to redirect immediately but does not require a path match.**
 
 ```jsx
