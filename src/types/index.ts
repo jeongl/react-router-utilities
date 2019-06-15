@@ -1,16 +1,18 @@
-interface IProtectedRouteGroup<RenderFnProps> {
-  Component?: React.ComponentType<
-    RenderFnProps | { path: UndefinedOr<string> }
+import { RouteComponentProps } from "react-router-dom";
+
+interface Props<T = {}> {
+  Component: React.ComponentType<
+    RouteComponentProps & T & { path: string | undefined; newpath: any } | any
   >;
   children?: React.ReactNode;
-  redirectChoices: Array<IRedirectChoices>;
+  redirectChoices: Array<RedirectChoice>;
 }
 
-interface IRedirectChoices {
+interface RedirectChoice {
   path: string;
   test: boolean;
 }
 
 type UndefinedOr<T> = T | undefined;
 
-export { IRedirectChoices, UndefinedOr, IProtectedRouteGroup };
+export { RedirectChoice, UndefinedOr, Props };

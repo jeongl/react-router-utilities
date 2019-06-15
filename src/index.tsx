@@ -1,39 +1,54 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
-import { IProtectedRouteGroup, IRedirectChoices, UndefinedOr } from "./types";
+import {
+  Route,
+  Redirect,
+  BrowserRouter as Router,
+  RouteComponentProps
+} from "react-router-dom";
+import { Props, RedirectChoice } from "../index.d.ts";
 
-function ProtectedRouteGroup<RenderFnProps extends object>(
-  props: IProtectedRouteGroup<RenderFnProps>
-): JSX.Element {
+const ProtectedRouteGroup = <T extends React.FC<T & Props<T>>>(
+  props: Props<T>
+): JSX.Element => {
   const { redirectChoices, Component, children, ...rest } = props;
-  const returnObj: UndefinedOr<IRedirectChoices> = redirectChoices.find(
-    (option: IRedirectChoices) => option.test
+  const returnObj: RedirectChoice | undefined = redirectChoices.find(
+    (option: RedirectChoice) => option.test
   );
-  const path: UndefinedOr<string> = returnObj && returnObj.path;
+  const path: string | undefined = returnObj && returnObj.path;
 
   return (
-    <Route
-      {...rest}
-      render={props =>
-        !path
-          ? (Component && <Component path={path} {...rest} />) || children
-          : path !== props.location.pathname && (
-              <Redirect to={{ pathname: path }} />
-            )
-      }
-    />
+    <Router>
+      <Route
+        {...rest}
+        render={props =>
+          !path
+            ? (Component && <Component newpath={path} {...rest} />) || children
+            : path !== props.location.pathname && (
+                <Redirect to={{ pathname: path }} />
+              )
+        }
+      />
+    </Router>
   );
-}
+};
 
-const ProtectedRoute: React.FC<{
+interface ProtectedRouteProps<T = {}> {
   path: string;
-  render?: React.ComponentType<any>;
-  children?: React.ReactNode;
+  render?: React.ComponentType<T & RouteComponentProps>;
+  children?: React.ReactChildren;
   redirect: {
     test: boolean;
     path: string;
   };
-}> = ({ render: Component, children, redirect, ...rest }): JSX.Element => (
+  test: string;
+}
+
+const ProtectedRoute = <P extends React.FC<P | ProtectedRouteProps>>({
+  render: Component,
+  children,
+  redirect,
+  ...rest
+}: ProtectedRouteProps & P): JSX.Element => (
   <Route
     {...rest}
     render={props => {

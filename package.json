@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "index.d.ts",
   "scripts": {
     "clean": "./scripts.sh",
-    "build": "webpack",
-    "start": "webpack-dev-server",
+    "build": "webpack --watch",
+    "start": "webpack-dev-server --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
